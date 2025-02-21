@@ -30,7 +30,7 @@ public partial class GuiView : Form
         _brushColorTwo = brushColorTwo ?? Brushes.Silver;
 
         _controller = new Controller(new MovementService(gameSettings), new ChessCoreEngineAdapterService());
-        _controller.Start();
+        _controller.Start(gameSettings.is690);
         MouseClick += GUIView_MouseClick;
     }
 

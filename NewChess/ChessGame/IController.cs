@@ -3,6 +3,6 @@
 namespace ChessGame;
 public interface IController
 {
-    void Start();
+    void Start(bool is690);
     bool Select(Point coordinate);
 }

@@ -4,6 +4,7 @@ using System.Drawing;
 namespace ChessGame;
 public interface IGameSettings
 {
+    bool is690 { get; set; }
     bool PlayAgainstAi { get; set; }
     Team CurrentTeam { get; set; }
     Point GetMyKingLocation();

@@ -31,77 +31,93 @@ namespace ChessGame.View
         /// </summary>
         private void InitializeComponent()
         {
-            this.button_StartBlackVsComputerGame = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button_StartWhiteVsComputerGame = new System.Windows.Forms.Button();
-            this.button_StartHumanGame = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            button_StartBlackVsComputerGame = new Button();
+            label1 = new Label();
+            button_StartWhiteVsComputerGame = new Button();
+            button_StartHumanGame = new Button();
+            button_Play690 = new Button();
+            SuspendLayout();
             // 
             // button_StartBlackVsComputerGame
             // 
-            this.button_StartBlackVsComputerGame.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button_StartBlackVsComputerGame.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_StartBlackVsComputerGame.Location = new System.Drawing.Point(0, 211);
-            this.button_StartBlackVsComputerGame.Margin = new System.Windows.Forms.Padding(50, 0, 50, 0);
-            this.button_StartBlackVsComputerGame.Name = "button_StartBlackVsComputerGame";
-            this.button_StartBlackVsComputerGame.Size = new System.Drawing.Size(284, 50);
-            this.button_StartBlackVsComputerGame.TabIndex = 3;
-            this.button_StartBlackVsComputerGame.Text = "Play as Black vs Computer";
-            this.button_StartBlackVsComputerGame.UseVisualStyleBackColor = true;
-            this.button_StartBlackVsComputerGame.Click += new System.EventHandler(this.Button_StartBlackVsComputerGame_Click);
+            button_StartBlackVsComputerGame.Dock = DockStyle.Bottom;
+            button_StartBlackVsComputerGame.Font = new System.Drawing.Font("Segoe UI", 15.75F);
+            button_StartBlackVsComputerGame.Location = new System.Drawing.Point(0, 558);
+            button_StartBlackVsComputerGame.Margin = new Padding(71, 0, 71, 0);
+            button_StartBlackVsComputerGame.Name = "button_StartBlackVsComputerGame";
+            button_StartBlackVsComputerGame.Size = new System.Drawing.Size(505, 83);
+            button_StartBlackVsComputerGame.TabIndex = 3;
+            button_StartBlackVsComputerGame.Text = "Play as Black vs Computer";
+            button_StartBlackVsComputerGame.UseVisualStyleBackColor = true;
+            button_StartBlackVsComputerGame.Click += Button_StartBlackVsComputerGame_Click;
             // 
             // label1
             // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(284, 50);
-            this.label1.TabIndex = 100;
-            this.label1.Text = "Welcome to to Ash\'s Chess Program. Have fun!";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label1.Dock = DockStyle.Top;
+            label1.Font = new System.Drawing.Font("Segoe UI", 12F);
+            label1.Location = new System.Drawing.Point(0, 0);
+            label1.Margin = new Padding(0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(505, 83);
+            label1.TabIndex = 100;
+            label1.Text = "Welcome to to Ash's Chess Program. Have fun!";
+            label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button_StartWhiteVsComputerGame
             // 
-            this.button_StartWhiteVsComputerGame.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button_StartWhiteVsComputerGame.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_StartWhiteVsComputerGame.Location = new System.Drawing.Point(0, 161);
-            this.button_StartWhiteVsComputerGame.Margin = new System.Windows.Forms.Padding(50, 0, 50, 0);
-            this.button_StartWhiteVsComputerGame.Name = "button_StartWhiteVsComputerGame";
-            this.button_StartWhiteVsComputerGame.Size = new System.Drawing.Size(284, 50);
-            this.button_StartWhiteVsComputerGame.TabIndex = 2;
-            this.button_StartWhiteVsComputerGame.Text = "Play as White vs Computer";
-            this.button_StartWhiteVsComputerGame.UseVisualStyleBackColor = true;
-            this.button_StartWhiteVsComputerGame.Click += new System.EventHandler(this.Button_StartWhiteVsComputerGame_Click);
+            button_StartWhiteVsComputerGame.Dock = DockStyle.Bottom;
+            button_StartWhiteVsComputerGame.Font = new System.Drawing.Font("Segoe UI", 15.75F);
+            button_StartWhiteVsComputerGame.Location = new System.Drawing.Point(0, 475);
+            button_StartWhiteVsComputerGame.Margin = new Padding(71, 0, 71, 0);
+            button_StartWhiteVsComputerGame.Name = "button_StartWhiteVsComputerGame";
+            button_StartWhiteVsComputerGame.Size = new System.Drawing.Size(505, 83);
+            button_StartWhiteVsComputerGame.TabIndex = 2;
+            button_StartWhiteVsComputerGame.Text = "Play as White vs Computer";
+            button_StartWhiteVsComputerGame.UseVisualStyleBackColor = true;
+            button_StartWhiteVsComputerGame.Click += Button_StartWhiteVsComputerGame_Click;
             // 
             // button_StartHumanGame
             // 
-            this.button_StartHumanGame.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button_StartHumanGame.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_StartHumanGame.Location = new System.Drawing.Point(0, 111);
-            this.button_StartHumanGame.Margin = new System.Windows.Forms.Padding(50, 0, 50, 0);
-            this.button_StartHumanGame.Name = "button_StartHumanGame";
-            this.button_StartHumanGame.Size = new System.Drawing.Size(284, 50);
-            this.button_StartHumanGame.TabIndex = 1;
-            this.button_StartHumanGame.Text = "Play Human vs Human";
-            this.button_StartHumanGame.UseVisualStyleBackColor = true;
-            this.button_StartHumanGame.Click += new System.EventHandler(this.Button_StartHumanGame_Click);
+            button_StartHumanGame.Dock = DockStyle.Bottom;
+            button_StartHumanGame.Font = new System.Drawing.Font("Segoe UI", 15.75F);
+            button_StartHumanGame.Location = new System.Drawing.Point(0, 392);
+            button_StartHumanGame.Margin = new Padding(71, 0, 71, 0);
+            button_StartHumanGame.Name = "button_StartHumanGame";
+            button_StartHumanGame.Size = new System.Drawing.Size(505, 83);
+            button_StartHumanGame.TabIndex = 1;
+            button_StartHumanGame.Text = "Play Human vs Human";
+            button_StartHumanGame.UseVisualStyleBackColor = true;
+            button_StartHumanGame.Click += Button_StartHumanGame_Click;
+            // 
+            // button_Play690
+            // 
+            button_Play690.Dock = DockStyle.Bottom;
+            button_Play690.Font = new System.Drawing.Font("Segoe UI", 15.75F);
+            button_Play690.Location = new System.Drawing.Point(0, 309);
+            button_Play690.Margin = new Padding(71, 0, 71, 0);
+            button_Play690.Name = "button_Play690";
+            button_Play690.Size = new System.Drawing.Size(505, 83);
+            button_Play690.TabIndex = 4;
+            button_Play690.Text = "Play Chess 690 (PvP)";
+            button_Play690.UseVisualStyleBackColor = true;
+            button_Play690.Click += Button_Start690_Click;
             // 
             // MainMenuView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.button_StartHumanGame);
-            this.Controls.Add(this.button_StartWhiteVsComputerGame);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button_StartBlackVsComputerGame);
-            this.Name = "MainMenuView";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Welcome";
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
+            ClientSize = new System.Drawing.Size(505, 641);
+            Controls.Add(button_Play690);
+            Controls.Add(button_StartHumanGame);
+            Controls.Add(button_StartWhiteVsComputerGame);
+            Controls.Add(label1);
+            Controls.Add(button_StartBlackVsComputerGame);
+            Margin = new Padding(4, 5, 4, 5);
+            Name = "MainMenuView";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Welcome";
+            ResumeLayout(false);
 
         }
 
@@ -110,5 +126,6 @@ namespace ChessGame.View
         private Label label1;
         private Button button_StartWhiteVsComputerGame;
         private Button button_StartHumanGame;
+        private Button button_Play690;
     }
 }

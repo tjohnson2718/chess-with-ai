@@ -38,4 +38,11 @@ public partial class MainMenuView : Form
         // Hide current page
         Hide();
     }
+
+    private void Button_Start690_Click(object sender, EventArgs e)
+    {
+        GameSettings settings = new() { is690 = true };
+        var page = new GuiView(settings);
+        ShowNewForm(page);
+    }
 }

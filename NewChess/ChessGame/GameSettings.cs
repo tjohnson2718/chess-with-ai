@@ -5,6 +5,7 @@ namespace ChessGame;
 
 public class GameSettings : IGameSettings
 {
+    public bool is690 { get; set; } = false;
     public bool PlayAgainstAi { get; set; } = false;
     public Team CurrentTeam { get; set; } = Team.White;
     public Point WhiteKingLocation { get; set; } = new(4, 7);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -27,20 +28,38 @@ public class Controller : IController
 
     }
 
-    public void Start()
+    public void Start(bool is690)
     {
-        InitPawns(6, Team.White);
-        InitBackRow(7, Team.White);
-        InitPawns(1, Team.Black);
-        InitBackRow(0, Team.Black);
-        UpdateAll();
-
-        if (_movementService.GameSettings.PlayAgainstAi
-            && _movementService.GameSettings.CurrentTeam == Team.Black)
+        if (is690)
         {
-            var outputFromAi = _adapter.MakeEngineMove();
-            ProcessAiOutput(outputFromAi);
+            InitPawns(6, Team.White);
+            InitPawns(1, Team.Black);
+            InitBackRow690(new List<Team> { Team.White, Team.Black });
+            UpdateAll();
+
+            if (_movementService.GameSettings.PlayAgainstAi
+                && _movementService.GameSettings.CurrentTeam == Team.Black)
+            {
+                var outputFromAi = _adapter.MakeEngineMove();
+                ProcessAiOutput(outputFromAi);
+            }
         }
+        else
+        {
+            InitPawns(6, Team.White);
+            InitBackRow(7, Team.White);
+            InitPawns(1, Team.Black);
+            InitBackRow(0, Team.Black);
+            UpdateAll();
+
+            if (_movementService.GameSettings.PlayAgainstAi
+                && _movementService.GameSettings.CurrentTeam == Team.Black)
+            {
+                var outputFromAi = _adapter.MakeEngineMove();
+                ProcessAiOutput(outputFromAi);
+            }
+        }
+        
     }
 
     private void UpdateAll()
@@ -68,6 +87,192 @@ public class Controller : IController
         _movementService.Place(row, 7, new Rook(team));
     }
 
+    public void InitBackRow690(List<Team> teams)
+    {
+        int rook_one_position = -1;
+        int rook_two_position = -1;
+        int king_position = -1;
+        int bishop_one_position = -1;
+        int bishop_two_position = -1;
+        int knight_one_position = -1;
+        int knight_two_position = -1;
+        int queen_position = -1;
+
+        List<int> available_positions = new List<int> {0, 1, 2, 3, 4, 5, 6, 7};
+
+        foreach (Team team in teams)
+        {
+            if (team == Team.White)
+            {
+                rook_one_position = GetRookPositions_690(available_positions, rook_one_position, rook_two_position);
+                rook_two_position = GetRookPositions_690(available_positions, rook_one_position, rook_two_position);
+                king_position = GetKingPosition_690(available_positions, rook_one_position, rook_two_position);
+                bishop_one_position = GetBishopPositions_690(available_positions, bishop_one_position, bishop_two_position);
+                bishop_two_position = GetBishopPositions_690(available_positions, bishop_one_position, bishop_two_position);
+                knight_one_position = GetRemainingPositions(available_positions);
+                knight_two_position = GetRemainingPositions(available_positions);
+                queen_position = GetRemainingPositions(available_positions);
+
+                _movementService.Place(7, rook_one_position, new Rook(team));
+                _movementService.Place(7, rook_two_position, new Rook(team));
+                _movementService.Place(7, king_position, new King(team));
+                _movementService.Place(7, bishop_one_position, new Bishop(team));
+                _movementService.Place(7, bishop_two_position, new Bishop(team));
+                _movementService.Place(7, knight_one_position, new Knight(team));
+                _movementService.Place(7, knight_two_position, new Knight(team));
+                _movementService.Place(7, queen_position, new Queen(team));
+            }
+            else
+            {
+                _movementService.Place(0, rook_one_position, new Rook(team));
+                _movementService.Place(0, rook_two_position, new Rook(team));
+                _movementService.Place(0, king_position, new King(team));
+                _movementService.Place(0, bishop_one_position, new Bishop(team));
+                _movementService.Place(0, bishop_two_position, new Bishop(team));
+                _movementService.Place(0, knight_one_position, new Knight(team));
+                _movementService.Place(0, knight_two_position, new Knight(team));
+                _movementService.Place(0, queen_position, new Queen(team));
+            }
+        }
+    }
+    public int GetRemainingPositions(List<int> available_positions)
+    {
+        Random random = new Random();
+        int index = random.Next(available_positions.Count() - 1);
+        int position = available_positions.ElementAt(index);
+        available_positions.RemoveAt(index);
+        return position;
+    }
+    public int GetBishopPositions_690(List<int> available_positions, int b1_position, int b2_position)
+    {
+        Random random = new Random();
+        if (b1_position == -1)
+        {
+            int index = random.Next(available_positions.Count() - 1);
+            int position = available_positions.ElementAt(index);
+            available_positions.RemoveAt(index);
+            return position;
+        }
+        else
+        {
+            while (true)
+            {
+                int index = random.Next(available_positions.Count() - 1);
+                if (validateBishopPositions_690(b1_position, available_positions.ElementAt(index)))
+                {
+                    int position = available_positions.ElementAt(index);
+                    available_positions.RemoveAt(index);
+                    return position;
+                }
+            }
+        }
+    }
+    public int GetRookPositions_690(List<int> available_positions, int r1_position, int r2_position)
+    {
+        Random random = new Random();
+        if (r1_position == -1)
+        {
+            int index = random.Next(available_positions.Count() - 1);
+            int position = available_positions.ElementAt(index);
+            available_positions.RemoveAt(index);
+            return position;
+        }
+        else
+        {
+            while (true)
+            {
+                int index = random.Next(available_positions.Count() - 1);
+                if (validateRookPositions_690(r1_position, available_positions.ElementAt(index)))
+                {
+                    int position = available_positions.ElementAt(index);
+                    available_positions.RemoveAt(index);
+                    return position;
+                }
+            }
+        }
+    }
+    public int GetKingPosition_690(List<int> available_positions, int rook1_position, int rook2_position)
+    {
+        Random random = new Random();
+        bool p1_is_greater = rook1_position > rook2_position;
+
+        if (p1_is_greater)
+        {
+            if (Math.Abs(rook1_position - rook2_position) == 2)
+            {
+                return rook2_position + 1;
+            }
+            else
+            {
+                while (true)
+                {
+                    int position = random.Next(rook2_position + 1, rook1_position - 1);
+                    if (position != rook1_position && position != rook2_position)
+                    {
+                        available_positions.RemoveAt(available_positions.IndexOf(position));
+                        return position;
+                    }
+                }
+            }
+
+        }
+        else
+        {
+            if (Math.Abs(rook1_position - rook2_position) == 2)
+            {
+                return rook1_position + 1;
+            }
+            else
+            {
+                while (true)
+                {
+                    int position = random.Next(rook1_position + 1, rook2_position - 1);
+                    if (position != rook1_position && position != rook2_position)
+                    {
+                        available_positions.RemoveAt(available_positions.IndexOf(position));
+                        return position;
+                    }
+                   
+                }
+            }
+        }    
+    }
+    public bool validateBishopPositions_690(int position_one, int position_two)
+    {
+        int position_difference = Math.Abs(position_one - position_two);
+        if ((position_two % 2) != (position_one % 2))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public bool validateRookPositions_690(int position_one, int position_two)
+    {
+        int position_difference = Math.Abs(position_one - position_two);
+        if (position_difference > 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public int GetLargestAvailablePosition(List<int> available_positions)
+    {
+        int largest_position = -1;
+        foreach (int position in available_positions)
+        {
+            if (position > largest_position)
+            {
+                largest_position = position;
+            }
+        }
+        return largest_position;
+    }
     //RESPONSE TO USER INPUT CODE
 
     public bool Select(Point coordinate)
